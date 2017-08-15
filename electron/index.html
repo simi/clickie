@@ -1,0 +1,25 @@
+<button id="toggleVisibility">Show/Hide working window</button>
+<br />
+<input id="searchText" placeholder="search term" />
+<button id="searchSubmit">Search on Google</button>
+<br />
+First google result title:
+<br />
+<textarea id="result" placeholder="result"></textarea>
+<script>
+let win = require('electron').remote.getGlobal('sharedObj').win2;
+let search = require('electron').remote.getGlobal('sharedObj').search;
+
+document.getElementById('toggleVisibility').addEventListener('click', function() {
+  if(win.isVisible()) {
+    win.hide();
+  } else {
+    win.show();
+  }
+});
+
+document.getElementById('searchSubmit').addEventListener('click', function() {
+  let term = document.getElementById('searchText').value;
+  search(term);
+});
+</script>
